@@ -1,1 +1,327 @@
-<h1>Hello USER</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR Constructions | Nellore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --primary-navy: #0A1128; /* Matches the dark background of the card */
+            --accent-gold: #FFC300; /* Matches the yellow logo */
+            --text-light: #F4F4F9;
+            --text-dark: #333333;
+            --section-bg: #FFFFFF;
+        }
+
+        /* --- Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--section-bg);
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background-color: var(--primary-navy);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .logo {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links li a {
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links li a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(10, 17, 40, 0.8), rgba(10, 17, 40, 0.8)), url('https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        .btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-navy);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            display: inline-block;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #e6b000;
+        }
+
+        /* --- Services Section --- */
+        .services {
+            padding: 5rem 5%;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .section-title {
+            color: var(--primary-navy);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .divider {
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            margin: 0 auto 40px;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-bottom: 4px solid var(--accent-gold);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+
+        /* --- About Section --- */
+        .about {
+            padding: 5rem 5%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background-color: var(--primary-navy);
+            color: var(--text-light);
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-text h2 {
+            color: var(--accent-gold);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .about-text h4 {
+            margin-bottom: 15px;
+            font-weight: 400;
+            font-style: italic;
+        }
+        .social-proof {
+            margin-top: 30px;
+        }
+        .social-proof a {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        .social-proof a:hover {
+            color: #fff;
+        }
+
+        /* --- Contact Section --- */
+        .contact {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .info-item i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            background: var(--primary-navy);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-navy);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px;
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simple mobile view, hides menu */
+            .hero h1 { font-size: 2.5rem; }
+            .about { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-building"></i> PR CONSTRUCTIONS
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div>
+            <h1>Building Your Dreams with Precision</h1>
+            <p>Premium civil engineering, real-time construction updates, and structural excellence in Nellore, Andhra Pradesh.</p>
+            <a href="#contact" class="btn">Get a Consultation</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="section-title">Our Expertise</h2>
+        <div class="divider"></div>
+        <div class="service-grid">
+            <div class="service-card">
+                <i class="fa-solid fa-house-chimney"></i>
+                <h3>Residential Projects</h3>
+                <p>From foundations to G+ multi-story residences. We ensure structural integrity and flawless execution for your family's future.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-compass-drafting"></i>
+                <h3>Modern Elevations & Design</h3>
+                <p>Bringing architectural blueprints to life with modern facades, utilizing premium materials like ALCO panels, HPL boards, and vitrified finishes.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-helmet-safety"></i>
+                <h3>Civil Engineering Consultancy</h3>
+                <p>Professional oversight, transparent project progress insights, and real-time updates directly from the site.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2>About PR Constructions</h2>
+            <h4>Led by Phaneendra Renangi, CEO & Founder</h4>
+            <p>At PR Constructions, we believe in complete transparency and uncompromising quality. Based in Nellore, we are dedicated to transforming concepts into concrete reality.</p>
+            <br>
+            <p>We leverage modern engineering practices and provide our clients with real-time construction updates so you are always connected to your project's progress.</p>
+            
+            <div class="social-proof">
+                <p style="margin-bottom: 10px;"><strong>Follow our project updates:</strong></p>
+                <a href="https://www.youtube.com/@PRConstructions-official" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://instagram.com/pr_constructions_official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Let's Build Together</h2>
+        <div class="divider"></div>
+        <p>Ready to start your next project? Reach out to us for professional guidance and execution.</p>
+        
+        <div class="contact-info">
+            <div class="info-item">
+                <i class="fa-solid fa-phone"></i>
+                <h3>Call Us</h3>
+                <p>+91 97007 38063</p>
+            </div>
+            <div class="info-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <h3>Visit Us</h3>
+                <p>Room No.13, 1st Floor KAC Plaza,<br>Beside Narthaki Plaza, Nellore<br>Andhra Pradesh 524001</p>
+            </div>
+            <div class="info-item">
+                <i class="fa-solid fa-envelope"></i>
+                <h3>Email Us</h3>
+                <p>contact.prconstructions@gmail.com</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 PR Constructions Official. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
