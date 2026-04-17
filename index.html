@@ -388,64 +388,61 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const counterSection = document.getElementById("counterSection");
-            const counters = counterSection.querySelectorAll("h2");
-            const speed = 200; // Counter speed (higher is slower)
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const counterSection = document.getElementById("counterSection");
+        const counters = counterSection.querySelectorAll("h2");
+        const duration = 2500; // 2.5 seconds - The "Golden Standard" for luxury site animations
 
-            const animateCounters = () => {
-                counters.forEach(counter => {
-                    const updateCount = () => {
-                        const targetStr = counter.getAttribute("data-target");
-                        if (!targetStr) return; // Skip if no data-target
-
-                        const targetText = targetStr.trim();
-                        // Extract number
-                        const targetNum = parseInt(targetText.match(/\d+/)[0], 10);
-                        const currentText = counter.innerText;
-                        const currentNum = parseInt(currentText.match(/\d+/)?.[0] || '0', 10);
-
-                        // Extract non-number suffix (+ or %)
-                        const suffix = targetText.match(/\D+$/)?.[0] || "";
-
-                        const inc = targetNum / speed;
-
-                        if (currentNum < targetNum) {
-                            const newNum = Math.ceil(currentNum + inc);
-                            counter.innerText = newNum + suffix;
-                            setTimeout(updateCount, 1);
-                        } else {
-                            counter.innerText = targetNum + suffix;
-                        }
-                    };
-                    updateCount();
-                });
-            };
-
-            // Intersection Observer to trigger animation on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !counterSection.dataset.triggered) {
-                        animateCounters();
-                        // Prevent re-triggering
-                        counterSection.dataset.triggered = "true";
-                    }
-                });
-            }, { threshold: 0.5 }); // Trigger when 50% visible
-
-            // Prepare targets and initial state
+        const animateCounters = () => {
             counters.forEach(counter => {
-                const targetText = counter.innerText;
-                counter.setAttribute("data-target", targetText);
-                // Extract suffix for initial state
-                const suffix = targetText.match(/\D+$/)?.[0] || "";
-                counter.innerText = '0' + suffix; // Start at 0 with the suffix
-            });
+                const targetStr = counter.getAttribute("data-target");
+                if (!targetStr) return;
 
-            observer.observe(counterSection);
+                const targetNum = parseInt(targetStr.match(/\d+/)[0], 10);
+                const suffix = targetStr.match(/\D+$/)?.[0] || "";
+                const startTime = performance.now();
+
+                const updateCount = (currentTime) => {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    
+                    // "Ease Out" timing function makes it slow down as it reaches the end
+                    const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+                    
+                    const currentNum = Math.floor(easeOutProgress * targetNum);
+                    counter.innerText = currentNum + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = targetStr; // Ensure final state is exact
+                    }
+                };
+
+                requestAnimationFrame(updateCount);
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterSection.dataset.triggered) {
+                    animateCounters();
+                    counterSection.dataset.triggered = "true";
+                }
+            });
+        }, { threshold: 0.4 });
+
+        counters.forEach(counter => {
+            const targetText = counter.innerText;
+            counter.setAttribute("data-target", targetText);
+            const suffix = targetText.match(/\D+$/)?.[0] || "";
+            counter.innerText = '0' + suffix; 
         });
-    </script>
+
+        observer.observe(counterSection);
+    });
+</script>
 
 </body>
 </html>
